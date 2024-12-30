@@ -60,10 +60,12 @@ def main(args):
     print(f"Recall: {recall:.3f}")
     print(f"FBeta: {fbeta:.3f}")
 
+    slice_feature_data(model, encoder, lb, args.feature)
+
 
 def slice_feature_data(model, encoder, lb, feature):
-    dataframe = pd.DataFrame(
-        columns=["feature", "value", "precision", "recall", "fbeta_score"])
+
+    row = []
     for value in data[feature].unique():
         slice_data = data[data[feature] == value]
         X_test, y_test, encoder, lb = process_data(
@@ -76,15 +78,17 @@ def slice_feature_data(model, encoder, lb, feature):
         )
         y_pred = inference(model, X_test)
         precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
-        dataframe = dataframe.append({
+        row.append({
             "feature": feature,
             "value": value,
             "precision": precision,
             "recall": recall,
-            "fbeta_score": fbeta}, ignore_index=True)
+            "fbeta_score": fbeta})
 
-    dataframe.to_csv(os.path.join(
-        "data", "slice_performance_outputs.csv"), index=False)
+    df = pd.DataFrame(row,
+                      columns=["feature", "value", "precision", "recall", "fbeta_score"])
+    df.to_csv(os.path.join(
+        "starter/data", "slice_performance_outputs.csv"), index=False)
 
 
 if __name__ == "__main__":
