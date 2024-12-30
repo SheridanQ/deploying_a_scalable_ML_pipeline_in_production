@@ -1,5 +1,11 @@
 import numpy as np
+import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import os
+
+
+def load_data():
+    return pd.read_csv(os.path.join("starter/data", "cleaned_data.csv"), index_col=0)
 
 
 def process_data(
