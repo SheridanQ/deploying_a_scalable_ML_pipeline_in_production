@@ -1,9 +1,5 @@
-python==3.8
 numpy
 pandas
-ydata-profiling
-dvc
-ipykernel
 scikit-learn
 pytest
 requests
