@@ -5,7 +5,7 @@ import os
 
 
 def load_data():
-    return pd.read_csv(os.path.join("starter/data", "cleaned_data.csv"), index_col=0)
+    return pd.read_csv(os.path.join("data", "cleaned_data.csv"))
 
 
 def process_data(

@@ -68,24 +68,24 @@ def inference(model, X):
 
 
 def save_model(model, encoder, lb):
-    with open(os.path.join("starter/model", "model.pkl"), "wb") as f:
+    with open(os.path.join("model", "model.pkl"), "wb") as f:
         pickle.dump(model, f)
 
-    with open(os.path.join("starter/model", "encoder.pkl"), "wb") as f:
+    with open(os.path.join("model", "encoder.pkl"), "wb") as f:
         pickle.dump(encoder, f)
 
-    with open(os.path.join("starter/model", "lb.pkl"), "wb") as f:
+    with open(os.path.join("model", "lb.pkl"), "wb") as f:
         pickle.dump(lb, f)
 
 
 def load_model():
-    with open(os.path.join("starter/model", "model.pkl"), "rb") as f:
+    with open(os.path.join("model", "model.pkl"), "rb") as f:
         model = pickle.load(f)
 
-    with open(os.path.join("starter/model", "encoder.pkl"), "rb") as f:
+    with open(os.path.join("model", "encoder.pkl"), "rb") as f:
         encoder = pickle.load(f)
 
-    with open(os.path.join("starter/model", "lb.pkl"), "rb") as f:
+    with open(os.path.join("model", "lb.pkl"), "rb") as f:
         lb = pickle.load(f)
 
     return model, encoder, lb

@@ -61,3 +61,12 @@ def test_compute_model_metrics():
     assert 0 <= precision <= 1
     assert 0 <= recall <= 1
     assert 0 <= fbeta <= 1
+
+
+if __name__ == "__main__":
+    data = load_data()
+    print(data.head())
+    test_null(data)
+    test_age_range(data)
+    test_inference()
+    test_compute_model_metrics()

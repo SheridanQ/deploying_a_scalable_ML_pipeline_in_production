@@ -36,8 +36,7 @@ class ModelInput(BaseModel):
         'Bachelors', 'HS-grad', '11th', 'Masters', '9th',
         'Some-college', 'Assoc-acdm', '7th-8th', 'Doctorate', 'Assoc-voc', 'Prof-school',
         '5th-6th', '10th', 'Preschool', '12th', '1st-4th']
-    education_num: int
-    marital_status: Literal[
+    maritalStatus: Literal[
         "Never-married", "Married-civ-spouse", "Divorced", "Married-spouse-absent",
         "Separated", "Married-AF-spouse", "Widowed"]
     occupation: Literal[
@@ -52,10 +51,8 @@ class ModelInput(BaseModel):
         "White", "Asian-Pac-Islander",
         "Amer-Indian-Eskimo", "Other", "Black"]
     sex: Literal["Female", "Male"]
-    capital_gain: int
-    capital_loss: int
-    hours_per_week: int
-    native_country: Literal[
+    hoursPerWeek: int
+    nativeCountry: Literal[
         'United-States', 'Cuba', 'Jamaica', 'India', 'Mexico',
         'Puerto-Rico', 'Honduras', 'England', 'Canada', 'Germany', 'Iran',
         'Philippines', 'Poland', 'Columbia', 'Cambodia', 'Thailand',
@@ -73,16 +70,13 @@ class ModelInput(BaseModel):
                 "workclass": 'Private',
                 "fnlgt": 77516,
                 "education": 'Bachelors',
-                "education_num": 13,
-                "marital_status": "Never-married",
+                "maritalStatus": "Never-married",
                 "occupation": "Tech-support",
                 "relationship": "Unmarried",
                 "race": "White",
                 "sex": "Male",
-                "capital_gain": 20000,
-                "capital_loss": 0,
-                "hours_per_week": 40,
-                "native_country": 'United-States'
+                "hoursPerWeek": 40,
+                "nativeCountry": 'United-States'
             }
         }
 
@@ -101,18 +95,16 @@ def predict(data: ModelInput):
                               "workclass": data.workclass,
                               "fnlgt": data.fnlgt,
                               "education": data.education,
-                              "education-num": data.education_num,
-                              "marital-status": data.marital_status,
+                              "marital-status": data.maritalStatus,
                               "occupation": data.occupation,
                               "relationship": data.relationship,
                               "race": data.race,
                               "sex": data.sex,
-                              "capital-gain": data.capital_gain,
-                              "capital-loss": data.capital_loss,
-                              "hours-per-week": data.hours_per_week,
-                              "native-country": data.native_country}])
+                              "hours-per-week": data.hoursPerWeek,
+                              "native-country": data.nativeCountry}])
 
     # Logging the input data for debugging purposes
+    print(input_df.to_dict())
     logger.info(f" input_data: {input_df.to_dict()}")
 
     # Process the input data using the predefined process_data function
@@ -125,12 +117,12 @@ def predict(data: ModelInput):
     predictions = inference(trained_model, X)
 
     # Convert predictions back to original labels
-    preds = lb.inverse_transform(predictions)
+    preds = lb.inverse_transform(predictions)[0]
 
     logging.info(f" predictions: {preds}")
 
     # Return the predictions in JSON format
-    return {"predictions": preds.tolist()}
+    return {"predictions": preds}
 
 
 # Run the FastAPI app if the script is executed directly
