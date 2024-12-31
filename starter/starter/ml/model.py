@@ -80,6 +80,7 @@ def save_model(model, encoder, lb):
 
 def load_model():
     base_dir = os.path.dirname(os.path.abspath(__file__))
+    print(base_dir)
 
     with open(os.path.join(base_dir, "..", "..", "model", "model.pkl"), "rb") as f:
         model = pickle.load(f)
