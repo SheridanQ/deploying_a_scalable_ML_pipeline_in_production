@@ -2,15 +2,17 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 import os
-import sys
-script_dir = os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__)))))
-sys.path.insert(0, script_dir)
+# import sys
+# script_dir = os.path.dirname(os.path.dirname(
+#     os.path.dirname(os.path.abspath(__file__))))
+# sys.path.insert(0, script_dir)
 
 
 def load_data():
-    print(script_dir)
-    return pd.read_csv(os.path.join("data", "cleaned_data.csv"))
+    base_dir = os.path.dirname(os.path.abspath(
+        __file__))  # Location of `data.py`
+    data_path = os.path.join(base_dir, "..", "..", "data", "cleaned_data.csv")
+    return pd.read_csv(data_path)
 
 
 def process_data(

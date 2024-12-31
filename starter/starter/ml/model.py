@@ -2,10 +2,6 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 import pickle
 import os
-# import sys
-# # Optional: implement hyperparameter tuning.
-# script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# sys.path.insert(0, script_dir)
 
 
 def train_model(X_train, y_train):
@@ -70,24 +66,28 @@ def inference(model, X):
 
 
 def save_model(model, encoder, lb):
-    with open(os.path.join("model", "model.pkl"), "wb") as f:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(base_dir, "..", "..", "model", "model.pkl"), "wb") as f:
         pickle.dump(model, f)
 
-    with open(os.path.join("model", "encoder.pkl"), "wb") as f:
+    with open(os.path.join(base_dir, "..", "..", "model", "encoder.pkl"), "wb") as f:
         pickle.dump(encoder, f)
 
-    with open(os.path.join("model", "lb.pkl"), "wb") as f:
+    with open(os.path.join(base_dir, "..", "..", "model", "lb.pkl"), "wb") as f:
         pickle.dump(lb, f)
 
 
 def load_model():
-    with open(os.path.join("model", "model.pkl"), "rb") as f:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(base_dir, "..", "..", "model", "model.pkl"), "rb") as f:
         model = pickle.load(f)
 
-    with open(os.path.join("model", "encoder.pkl"), "rb") as f:
+    with open(os.path.join(base_dir, "..", "..", "model", "encoder.pkl"), "rb") as f:
         encoder = pickle.load(f)
 
-    with open(os.path.join("model", "lb.pkl"), "rb") as f:
+    with open(os.path.join(base_dir, "..", "..", "model", "lb.pkl"), "rb") as f:
         lb = pickle.load(f)
 
     return model, encoder, lb

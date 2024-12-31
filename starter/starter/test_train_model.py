@@ -8,9 +8,11 @@ from starter.ml.model import inference, compute_model_metrics, load_model
 from starter.train_model import categorical_features, process_data
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def data():
-    return load_data()
+    df = load_data()
+    print(df)
+    return df
 
 
 def test_null(data):
@@ -21,7 +23,7 @@ def test_age_range(data):
     assert data['age'].between(0, 120).all()
 
 
-def test_inference():
+def test_inference(data):
     """
     Test the type and value return by inference() is correct
     """
@@ -41,7 +43,7 @@ def test_inference():
     assert list(np.unique(prediction)) == [0, 1]
 
 
-def test_compute_model_metrics():
+def test_compute_model_metrics(data):
     """
     Test the range of performance metrics returned by compute_model_metrics()
     """
