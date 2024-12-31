@@ -11,7 +11,6 @@ from starter.train_model import categorical_features, process_data
 @pytest.fixture(scope="session")
 def data():
     df = load_data()
-    print(df)
     return df
 
 

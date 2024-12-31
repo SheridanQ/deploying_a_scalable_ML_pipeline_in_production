@@ -30,7 +30,7 @@ def test_predict_endpoint():
         "race": "White",
         "sex": "Male",
         "hoursPerWeek": 40,
-        "nativeCountry": "United-States"})
+        "nativeCountry": "United-States"}, follow_redirects=True)
     print(response.json())
 
     assert response.status_code == 200, response.json()
@@ -73,7 +73,7 @@ def test_post_less_50k():
         "hoursPerWeek": 40,
         "nativeCountry": "United-States"
     }
-    response = client.post("/predict/", json=input_dict)
+    response = client.post("/predict/", json=input_dict, follow_redirects=True)
     assert response.status_code == 200
     assert response.json()["predictions"] == '<=50K'
 
@@ -92,7 +92,7 @@ def test_post_greater_50k():
         "hoursPerWeek": 50,
         "nativeCountry": "United-States"
     }
-    response = client.post("/predict/", json=input_dict)
+    response = client.post("/predict/", json=input_dict, follow_redirects=True)
     assert response.status_code == 200
     assert response.json()["predictions"] == ">50K"
 
