@@ -15,8 +15,10 @@ data = {
     "nativeCountry": "United-States"
 }
 
-r = requests.post('https://udacity-mlops-pipeline-deploy.herokuapp.com//predict',
-                  json=data)
+r = requests.post('https://udacity-mlops-pipeline-deploy-259434f39aeb.herokuapp.com/predict',
+                  json=data, allow_redirects=True)
+print(f"Response code: {r.status_code}")
+print(f"Response body: {r.json()}")
 
 assert r.status_code == 200
 

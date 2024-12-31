@@ -2,11 +2,11 @@
 import os
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from starter.ml.data import process_data, load_data
-from starter.ml.model import (train_model,
-                              compute_model_metrics,
-                              inference,
-                              save_model)
+from src.ml.data import process_data, load_data
+from src.ml.model import (train_model,
+                          compute_model_metrics,
+                          inference,
+                          save_model)
 import logging
 import argparse
 # import sys
