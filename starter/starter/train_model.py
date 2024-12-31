@@ -6,11 +6,11 @@ import os
 
 
 # Add the necessary imports for the starter code.
-from ml.data import process_data, load_data
-from ml.model import (train_model,
-                      compute_model_metrics,
-                      inference,
-                      save_model)
+from starter.ml.data import process_data, load_data
+from starter.ml.model import (train_model,
+                              compute_model_metrics,
+                              inference,
+                              save_model)
 import logging
 import argparse
 
