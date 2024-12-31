@@ -1,0 +1,63 @@
+import numpy as np
+import pytest
+import pandas as pd
+from starter.ml.data import load_datafrom
+from sklearn.model_selection import train_test_split
+
+from starter.ml.model import inference, compute_model_metrics, load_model
+from starter.train_model import categorical_features, process_data
+
+
+@pytest.fixture
+def data():
+    return load_data()
+
+
+def test_null(data):
+    assert data.shape == data.dropna().shape
+
+
+def test_age_range(data):
+    assert data['age'].between(0, 120).all()
+
+
+def test_inference():
+    """
+    Test the type and value return by inference() is correct
+    """
+    trained_model, encoder, lb = load_model()
+    _, test = train_test_split(data, test_size=0.20)
+
+    X_test, _, _, _ = process_data(
+        test,
+        categorical_features=categorical_features,
+        label="salary",
+        encoder=encoder,
+        lb=lb,
+        training=False)
+    prediction = inference(trained_model, X_test)
+
+    assert isinstance(prediction, np.ndarray)
+    assert list(np.unique(prediction)) == [0, 1]
+
+
+def test_compute_model_metrics():
+    """
+    Test the range of performance metrics returned by compute_model_metrics()
+    """
+    trained_model, encoder, lb = load_model()
+    _, test = train_test_split(data, test_size=0.20)
+
+    X_test, y_test, _, _ = process_data(
+        test,
+        categorical_features=categorical_features,
+        label="salary",
+        encoder=encoder,
+        lb=lb,
+        training=False)
+    prediction = inference(trained_model, X_test)
+    precision, recall, fbeta = compute_model_metrics(y_test, prediction)
+
+    assert 0 <= precision <= 1
+    assert 0 <= recall <= 1
+    assert 0 <= fbeta <= 1
