@@ -11,7 +11,7 @@ def test_get():
     Test GET() on the root for giving a welcome message.
     """
 
-    r = client.get("/")
+    r = client.get("/", allow_redirects=True)
     assert r.status_code == 200
     assert r.json() == {
         "greeting": "Welcome to Udacity MLDevops Project, this app predicts whether income exceeds $50k/yr based on personal census data."}
@@ -30,7 +30,7 @@ def test_predict_endpoint():
         "race": "White",
         "sex": "Male",
         "hoursPerWeek": 40,
-        "nativeCountry": "United-States"}, follow_redirects=True)
+        "nativeCountry": "United-States"}, allow_redirects=True)
     print(response.json())
 
     assert response.status_code == 200, response.json()
@@ -73,7 +73,7 @@ def test_post_less_50k():
         "hoursPerWeek": 40,
         "nativeCountry": "United-States"
     }
-    response = client.post("/predict/", json=input_dict, follow_redirects=True)
+    response = client.post("/predict/", json=input_dict, allow_redirects=True)
     assert response.status_code == 200
     assert response.json()["predictions"] == '<=50K'
 
@@ -92,7 +92,7 @@ def test_post_greater_50k():
         "hoursPerWeek": 50,
         "nativeCountry": "United-States"
     }
-    response = client.post("/predict/", json=input_dict, follow_redirects=True)
+    response = client.post("/predict/", json=input_dict, allow_redirects=True)
     assert response.status_code == 200
     assert response.json()["predictions"] == ">50K"
 
