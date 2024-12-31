@@ -1,11 +1,11 @@
 import numpy as np
 import pytest
 import pandas as pd
-from src.ml.data import load_data
+from starter.ml.data import load_data
 from sklearn.model_selection import train_test_split
 
-from src.ml.model import inference, compute_model_metrics, load_model
-from src.train_model import categorical_features, process_data
+from starter.ml.model import inference, compute_model_metrics, load_model
+from starter.train_model import categorical_features, process_data
 
 
 @pytest.fixture(scope="session")
