@@ -1,11 +1,7 @@
 # Script to train machine learning model.
-
-from sklearn.model_selection import train_test_split
-import pandas as pd
 import os
-
-
-# Add the necessary imports for the starter code.
+import pandas as pd
+from sklearn.model_selection import train_test_split
 from starter.ml.data import process_data, load_data
 from starter.ml.model import (train_model,
                               compute_model_metrics,
@@ -13,6 +9,12 @@ from starter.ml.model import (train_model,
                               save_model)
 import logging
 import argparse
+import sys
+script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, script_dir)
+
+
+# Add the necessary imports for the starter code.
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 
@@ -88,7 +90,7 @@ def slice_feature_data(model, encoder, lb, feature):
     df = pd.DataFrame(row,
                       columns=["feature", "value", "precision", "recall", "fbeta_score"])
     df.to_csv(os.path.join(
-        "starter/data", "slice_performance_outputs.csv"), index=False)
+        "data", "slice_performance_outputs.csv"), index=False)
 
 
 if __name__ == "__main__":
