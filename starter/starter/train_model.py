@@ -9,9 +9,9 @@ from starter.ml.model import (train_model,
                               save_model)
 import logging
 import argparse
-import sys
-script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, script_dir)
+# import sys
+# script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# sys.path.insert(0, script_dir)
 
 
 # Add the necessary imports for the starter code.

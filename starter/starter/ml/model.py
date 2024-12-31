@@ -2,10 +2,10 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 import pickle
 import os
-import sys
-# Optional: implement hyperparameter tuning.
-script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, script_dir)
+# import sys
+# # Optional: implement hyperparameter tuning.
+# script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# sys.path.insert(0, script_dir)
 
 
 def train_model(X_train, y_train):
