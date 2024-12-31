@@ -50,7 +50,7 @@ def test_validation_fields():
         "capital-gain": 1000,
         "capital-loss": 0,
         "hoursPerWeek": 40,
-        "nativeCountry": "United-States"})
+        "nativeCountry": "United-States"}, allow_redirects=True)
 
     assert response.status_code == 422
     assert len(response.json()['detail']) == 2
